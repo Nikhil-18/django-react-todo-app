@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import TodoList from "./components/TodoList";
 import { getAllTodo } from "./apis/TodoAPI";
+import NewTodo from "./components/NewTodo";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -9,6 +10,11 @@ function App() {
   useEffect(() => {
     setTodoList(() => getAllTodo());
   }, []);
+
+  const handleAddTodo = (todo) => {
+    const modTodo = { ...todo, completed: false, id: Math.random() };
+    setTodoList((prevTodoList) => [...prevTodoList, modTodo]);
+  };
 
   const handleToggle = (id) => {
     setTodoList((prevTodoList) =>
@@ -26,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+      <NewTodo handleAddTodo={handleAddTodo} />
       <TodoList
         todoList={todoList}
         handleToggle={handleToggle}

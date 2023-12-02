@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TodoItem = ({ todo, handleToggle, handleDelete }) => {
-  const { id, text, completed } = todo;
+  const { id, title, description, completed } = todo;
 
   return (
     <div>
@@ -11,7 +11,9 @@ const TodoItem = ({ todo, handleToggle, handleDelete }) => {
         checked={completed}
         onChange={() => handleToggle(id)}
       />
-      <span>{text}</span>
+      <span>
+        {title} - {description}
+      </span>
       <button onClick={() => handleDelete(id)}>Delete</button>
     </div>
   );
@@ -20,7 +22,8 @@ const TodoItem = ({ todo, handleToggle, handleDelete }) => {
 TodoItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.number,
-    text: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
     completed: PropTypes.bool,
   }),
   handleToggle: PropTypes.func,

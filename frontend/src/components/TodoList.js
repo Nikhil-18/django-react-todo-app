@@ -24,7 +24,8 @@ TodoList.propTypes = {
   todoList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      text: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string,
       completed: PropTypes.bool,
     })
   ),
