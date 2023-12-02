@@ -7,12 +7,30 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    setTodoList(getAllTodo());
+    setTodoList(() => getAllTodo());
   }, []);
+
+  const handleToggle = (id) => {
+    setTodoList((prevTodoList) =>
+      prevTodoList.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const handleDelete = (id) => {
+    setTodoList((prevTodoList) =>
+      prevTodoList.filter((todo) => todo.id !== id)
+    );
+  };
 
   return (
     <div className="App">
-      <TodoList todoList={todoList} />
+      <TodoList
+        todoList={todoList}
+        handleToggle={handleToggle}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 }
