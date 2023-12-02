@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import TodoItem from "./TodoItem";
+
 const TodoList = ({ todoList }) => {
   return (
     <ul>
       {todoList.map((todo, i) => {
-        return <li key={`todolist-${i}`}>{todo.text}</li>;
+        return <TodoItem key={`todolist-${i}`} todo={todo} />;
       })}
     </ul>
   );
