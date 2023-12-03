@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <NewTodo handleAddTodo={handleAddTodo} />
       <TodoList
         todoList={todoList}
