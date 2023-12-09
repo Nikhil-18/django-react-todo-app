@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import TodoList from "./components/TodoList";
 import { getAllTodo } from "./apis/TodoAPI";
@@ -8,7 +8,11 @@ function App() {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    setTodoList(() => getAllTodo());
+    const _f = async () => {
+      const todoListDB = await getAllTodo();
+      setTodoList(todoListDB);
+    };
+    _f();
   }, []);
 
   const handleAddTodo = (todo) => {
@@ -31,11 +35,13 @@ function App() {
   return (
     <div className="container">
       <NewTodo handleAddTodo={handleAddTodo} />
-      <TodoList
-        todoList={todoList}
-        handleUpdate={handleUpdate}
-        handleDelete={handleDelete}
-      />
+      <Suspense>
+        <TodoList
+          todoList={todoList}
+          handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
+        />
+      </Suspense>
     </div>
   );
 }
