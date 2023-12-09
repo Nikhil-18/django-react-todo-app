@@ -3,19 +3,19 @@ const fakeTodoList = [
     id: 1,
     title: "todo 1",
     description: "Lorem ipsum",
-    completed: false,
+    status: "To Do",
   },
   {
     id: 2,
     title: "todo 2",
     description: "Lorem ipsum",
-    completed: false,
+    status: "In Progress",
   },
   {
     id: 3,
     title: "todo 3",
     description: "Lorem ipsum",
-    completed: true,
+    status: "Done",
   },
 ];
 

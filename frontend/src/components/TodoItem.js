@@ -1,20 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TodoItem = ({ todo, handleToggle, handleDelete }) => {
-  const { id, title, description, completed } = todo;
+const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
+  const { id, title, description, status } = todo;
+
+  let borderColor = "";
+  if (status === "In Progress") {
+    borderColor = "border-info";
+  } else if (status === "Done") {
+    borderColor = "border-success";
+  }
+
+  const headerColor = status === "Done" ? "text-success" : "";
 
   return (
-    <div>
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={() => handleToggle(id)}
-      />
-      <span>
-        {title} - {description}
-      </span>
-      <button onClick={() => handleDelete(id)}>Delete</button>
+    <div className="col">
+      <div className={`card ${borderColor}`}>
+        <div className="card-body">
+          <h5 className={`card-title ${headerColor}`}>{title}</h5>
+          <p className="card-text">{description}</p>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => handleDelete(id)}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -24,9 +37,9 @@ TodoItem.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     description: PropTypes.string,
-    completed: PropTypes.bool,
+    status: PropTypes.string,
   }),
-  handleToggle: PropTypes.func,
+  handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
 };
 

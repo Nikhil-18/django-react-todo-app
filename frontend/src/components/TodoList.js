@@ -3,20 +3,20 @@ import PropTypes from "prop-types";
 
 import TodoItem from "./TodoItem";
 
-const TodoList = ({ todoList, handleToggle, handleDelete }) => {
+const TodoList = ({ todoList, handleUpdate, handleDelete }) => {
   return (
-    <ul>
+    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {todoList.map((todo, i) => {
         return (
           <TodoItem
             key={`todolist-${i}`}
             todo={todo}
-            handleToggle={handleToggle}
+            handleUpdate={handleUpdate}
             handleDelete={handleDelete}
           />
         );
       })}
-    </ul>
+    </div>
   );
 };
 
@@ -26,10 +26,10 @@ TodoList.propTypes = {
       id: PropTypes.number,
       title: PropTypes.string,
       description: PropTypes.string,
-      completed: PropTypes.bool,
+      status: PropTypes.string,
     })
   ),
-  handleToggle: PropTypes.func,
+  handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
 };
 

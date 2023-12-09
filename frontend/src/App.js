@@ -12,15 +12,13 @@ function App() {
   }, []);
 
   const handleAddTodo = (todo) => {
-    const modTodo = { ...todo, completed: false, id: Math.random() };
+    const modTodo = { ...todo, id: Math.random() };
     setTodoList((prevTodoList) => [...prevTodoList, modTodo]);
   };
 
-  const handleToggle = (id) => {
+  const handleUpdate = (id, modTodo) => {
     setTodoList((prevTodoList) =>
-      prevTodoList.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+      prevTodoList.map((todo) => (todo.id === id ? modTodo : todo))
     );
   };
 
@@ -35,7 +33,7 @@ function App() {
       <NewTodo handleAddTodo={handleAddTodo} />
       <TodoList
         todoList={todoList}
-        handleToggle={handleToggle}
+        handleUpdate={handleUpdate}
         handleDelete={handleDelete}
       />
     </div>
