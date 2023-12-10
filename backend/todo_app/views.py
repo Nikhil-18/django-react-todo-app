@@ -29,7 +29,7 @@ class TaskListView(View):
         limit = request.GET.get("limit")
         offset = offset and int(offset)
         limit = limit and int(limit)
-        tasks = Task.objects.filter(is_deleted=False).order_by("id")
+        tasks = Task.objects.filter(is_deleted=False).order_by("-id")
         if isinstance(offset, int) and isinstance(limit, int):
             tasks = tasks[offset : offset + limit]
 

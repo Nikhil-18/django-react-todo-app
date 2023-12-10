@@ -18,7 +18,7 @@ function App() {
   const handleAddTodo = async (todo) => {
     const resTodo = await createTodo(todo);
     if (!resTodo) return;
-    setTodoList((prevTodoList) => [...prevTodoList, resTodo]);
+    setTodoList((prevTodoList) => [resTodo, ...prevTodoList]);
   };
 
   const handleUpdate = async (id, modTodo) => {
