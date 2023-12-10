@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
   const { id, title, description, status } = todo;
 
-  const [selectedStatus, setSelectedStatus] = useState(status);
+  const [selectedStatus, setSelectedStatus] = useState("");
+
+  useEffect(() => {
+    setSelectedStatus(status);
+  }, [status]);
 
   let borderColor = "";
   if (status === "In Progress") {
