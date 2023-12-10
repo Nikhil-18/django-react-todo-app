@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+const initialState = {
+  title: "",
+  description: "",
+  status: "To Do",
+};
+
 const NewTodo = ({ handleAddTodo }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    status: "To Do",
-  });
+  const [formData, setFormData] = useState(initialState);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -16,6 +18,7 @@ const NewTodo = ({ handleAddTodo }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     handleAddTodo(new FormData(e.target));
+    setFormData(initialState);
   };
 
   return (
@@ -57,7 +60,7 @@ const NewTodo = ({ handleAddTodo }) => {
             onChange={handleFormChange}
             id="validationCustom04"
             required
-            defaultValue="To Do"
+            value={formData.status}
           >
             <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
