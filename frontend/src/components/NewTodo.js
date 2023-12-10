@@ -15,7 +15,7 @@ const NewTodo = ({ handleAddTodo }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleAddTodo(formData);
+    handleAddTodo(new FormData(e.target));
   };
 
   return (
@@ -59,9 +59,7 @@ const NewTodo = ({ handleAddTodo }) => {
             required
             defaultValue="To Do"
           >
-            <option value="To Do">
-              To Do
-            </option>
+            <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
           </select>

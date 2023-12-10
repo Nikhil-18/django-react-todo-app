@@ -22,7 +22,12 @@ const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
   const handleUpdateButton = () => {
     if (status === selectedStatus) return;
     const modTodo = { title, description, status: selectedStatus };
-    handleUpdate(id, modTodo);
+
+    const form_data = new FormData();
+    for (const key in modTodo) {
+      form_data.append(key, modTodo[key]);
+    }
+    handleUpdate(id, form_data);
   };
 
   return (

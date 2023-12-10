@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 
 import TodoList from "./components/TodoList";
-import { getAllTodo } from "./apis/TodoAPI";
+import { createTodo, deleteTodo, getAllTodo, updateTodo } from "./apis/TodoAPI";
 import NewTodo from "./components/NewTodo";
 
 function App() {
@@ -15,18 +15,23 @@ function App() {
     _f();
   }, []);
 
-  const handleAddTodo = (todo) => {
-    const modTodo = { ...todo, id: Math.random() };
-    setTodoList((prevTodoList) => [...prevTodoList, modTodo]);
+  const handleAddTodo = async (todo) => {
+    const resTodo = await createTodo(todo);
+    if (!resTodo) return;
+    setTodoList((prevTodoList) => [...prevTodoList, resTodo]);
   };
 
-  const handleUpdate = (id, modTodo) => {
+  const handleUpdate = async (id, modTodo) => {
+    const updatedTodo = await updateTodo(id, modTodo);
+    if (!updatedTodo) return;
     setTodoList((prevTodoList) =>
-      prevTodoList.map((todo) => (todo.id === id ? modTodo : todo))
+      prevTodoList.map((todo) => (todo.id === id ? updatedTodo : todo))
     );
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    const res = await deleteTodo(id);
+    if (!res) return;
     setTodoList((prevTodoList) =>
       prevTodoList.filter((todo) => todo.id !== id)
     );
